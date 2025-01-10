@@ -1,0 +1,19 @@
+jwt:
+  secret: ${JWT_SECRET_KEY} #add this as env variable
+  accessTokenExpirationTime: ${ACCESS_TOKEN_EXPIRATION_TIME}  # 15 minutes in milliseconds (900000 ms)
+  refreshTokenExpirationTime: ${REFRESH_TOKEN_EXPIRATION_TIME}  # 30 days in milliseconds (2592000000 ms)
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:postgresql://localhost:5432/your_database
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 30  # Production DB connection pool size
+  jpa:
+    hibernate:
+      ddl-auto: validate  # In production, only validate schema (do not auto-create)
+  logging:
+    level:
+      js.project: WARN  # Higher logging level (warnings and errors) in production

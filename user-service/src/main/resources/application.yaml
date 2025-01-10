@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:h2:file:C:\Users\003SCK744\Downloads
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  #    hikari:
+  #      maximum-pool-size: 10  # Development DB connection pool size
+  jpa:
+    hibernate:
+      ddl-auto: update  # In development, auto-create tables
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  kafka:
+    bootstrap-servers: localhost:9092
+server:
+  port: 8200
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+kafka:
+  consumer:
+    group-id: user-service-group
+  topic:
+    user-created: user-created
+
+logging:
+  level:
+    js.project.auth_service: DEBUG

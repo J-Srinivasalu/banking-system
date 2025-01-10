@@ -1,0 +1,27 @@
+#profiles doesn't seems to work properly \\\ can't use jwt.secret, but h2 database works
+
+
+jwt:
+  secret: wYsyEr6p1G0fUkIlCNF8zCKL5KLdlYu1iavEgwWsiLyKfZX91h4SrMm24gse6wuk #dev
+  accessTokenExpirationTime: 900000  # 15 minutes in milliseconds (900000 ms)
+  refreshTokenExpirationTime: 604800000  # 30 days in milliseconds (2592000000 ms)
+
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:h2:file:C:\Users\003SCK744\Downloads
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+#    hikari:
+#      maximum-pool-size: 10  # Development DB connection pool size
+  jpa:
+    hibernate:
+      ddl-auto: update  # In development, auto-create tables
+  h2:
+    console:
+      enabled: true
+      path: /h2-console  # H2 Console enabled for easy development testing
+  logging:
+    level:
+      js.project: DEBUG  # Debug level logging for development
