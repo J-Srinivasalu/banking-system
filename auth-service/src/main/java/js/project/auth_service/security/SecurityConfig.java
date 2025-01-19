@@ -24,14 +24,11 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final UserDetailsService userDetailsService;
-    private final CustomAccessDeniedHandler accessDeniedHandler;
 
     private static final String[] WHITE_LIST_URLS = {
             "/api/v1/auth/register",
             "/api/v1/auth/login",
-            "/api/v1/auth/validate",
-            "/api/v1/auth/kafka-string-test",
-            "/api/v1/auth/kafka-object-test"
+            "/api/v1/auth/validate"
     };
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -59,7 +56,6 @@ public class SecurityConfig {
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .exceptionHandling(exceptionHandler -> exceptionHandler.accessDeniedHandler(accessDeniedHandler))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

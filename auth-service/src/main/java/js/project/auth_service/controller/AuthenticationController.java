@@ -25,8 +25,6 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
-    private final KafkaTemplate<String, String> stringKafkaTemplate;
-    private final KafkaTemplate<String, ObjectTest> objectKafkaTemplate;
 
     @PostMapping("/register")
     public ResponseEntity<GeneralResponse> registerUser(@Valid @RequestBody UserRegisterRequest request) {
@@ -67,22 +65,6 @@ public class AuthenticationController {
         GeneralResponse response = authenticationService.resetPassword(request);
         log.info("Password reset successful for email: {}", request.getEmail());
         return ResponseEntity.status(HttpStatus.OK).body(response);
-    }
-
-    @PostMapping("/kafka-string-test")
-    public ResponseEntity<GeneralResponse> kafkaStringTest(@RequestBody  RefreshTokenRequest request) {
-        log.info("producer kafka message: {}", request.getRefreshToken());
-        stringKafkaTemplate.send("string-event",request.getRefreshToken());
-        log.info("producer kafka message: {} sent", request.getRefreshToken());
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
-
-    @PostMapping("/kafka-object-test")
-    public ResponseEntity<GeneralResponse> kafkaObjectTest(@RequestBody ObjectTest request) {
-        log.info("producer kafka object: {}", request);
-        objectKafkaTemplate.send("object-event",request);
-        log.info("producer kafka object: {} sent", request);
-        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }
