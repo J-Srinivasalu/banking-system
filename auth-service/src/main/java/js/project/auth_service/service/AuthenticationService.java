@@ -35,7 +35,7 @@ public class AuthenticationService {
     public GeneralResponse registerAdmin(AdminRegisterRequest request) {
         log.info("Registering admin with email: {}", request.getEmail());
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            log.warn("Email already taken: {}", request.getEmail());
+            log.warn("Email is already taken by another Admin: {}", request.getEmail());
             throw new EmailAlreadyTakenException(request.getEmail());
         }
 
@@ -60,7 +60,7 @@ public class AuthenticationService {
         log.info("Registering user with email: {}", request.getEmail());
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            log.warn("Email already taken: {}", request.getEmail());
+            log.warn("Email already taken by another user: {}", request.getEmail());
             throw new EmailAlreadyTakenException(request.getEmail());
         }
 

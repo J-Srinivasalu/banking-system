@@ -1,9 +1,13 @@
 package js.project.auth_service.model;// Auth Service: Address.java (DTO)
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AddressDto {
 
     @NotBlank(message = "Street is required")

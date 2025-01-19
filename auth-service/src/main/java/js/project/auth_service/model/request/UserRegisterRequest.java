@@ -5,9 +5,11 @@ import jakarta.validation.constraints.*;
 import js.project.auth_service.model.AddressDto;
 import js.project.auth_service.validation.ValidDateFormat;
 import js.project.auth_service.validation.ValidPassword;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class UserRegisterRequest {
 
     @NotEmpty(message = "First name cannot be empty")
