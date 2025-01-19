@@ -1,6 +1,7 @@
 package js.project.user_service.listener;
 
-import js.project.user_service.model.dto.UserCreatedEvent;
+import js.project.model.UserCreatedEvent;
+import js.project.user_service.model.ObjectTest;
 import js.project.user_service.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,4 +25,15 @@ public class UserCreatedListener {
             // todo: retry mechanism or dead-letter queue handling
         }
     }
+
+    @KafkaListener(topics = "string-event", groupId = "${kafka.consumer.group-id}")
+    public void listenStringEvent(String string) {
+        log.info("Received string event: {}", string);
+    }
+
+    @KafkaListener(topics = "object-event", groupId = "${kafka.consumer.group-id}")
+    public void listenObjectEvent(ObjectTest string) {
+        log.info("Received object event: {}", string);
+    }
+
 }

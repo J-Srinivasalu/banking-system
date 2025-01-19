@@ -11,7 +11,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.sql.SQLException;
 import java.util.Optional;
+
 
 @Configuration // only for dev
 public class InitialAdminUserConfig {
@@ -20,9 +22,10 @@ public class InitialAdminUserConfig {
 
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository){
-        return new UserDetailsServiceImpl(userRepository);
+    public UserDetailsService userDetailsService(){
+        return new UserDetailsServiceImpl();
     }
+
 
     @Bean
     //@Profile("dev") // This bean will only be created in the "dev" profile

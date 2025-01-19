@@ -2,13 +2,15 @@ package js.project.auth_service.service;
 
 import jakarta.transaction.Transactional;
 import js.project.auth_service.exception.*;
-import js.project.auth_service.model.UserCreatedEvent;
+import js.project.auth_service.model.AddressDto;
 import js.project.auth_service.model.request.*;
 import js.project.auth_service.model.response.GeneralResponse;
 import js.project.auth_service.repository.UserRepository;
 import js.project.auth_service.model.Role;
 import js.project.auth_service.model.User;
 import js.project.auth_service.model.response.AuthenticationResponse;
+import js.project.model.Address;
+import js.project.model.UserCreatedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -70,6 +72,15 @@ public class AuthenticationService {
 
         try {
             user = userRepository.save(user);
+            AddressDto addressDto = request.getAddress();
+            Address address = Address.builder()
+                    .apartmentSuite(addressDto.getApartmentSuite())
+                    .state(addressDto.getState())
+                    .city(addressDto.getCity())
+                    .country(addressDto.getCountry())
+                    .zipCode(addressDto.getZipCode())
+                    .street(addressDto.getStreet())
+                    .build();
 
             UserCreatedEvent userCreatedEvent = UserCreatedEvent.builder()
                     .userId(user.getId())
@@ -78,13 +89,13 @@ public class AuthenticationService {
                     .email(request.getEmail())
                     .phoneNumber(request.getPhoneNumber())
                     .dateOfBirth(LocalDate.parse(request.getDateOfBirth(), DateTimeFormatter.ofPattern("dd-MM-yyyy")))
-                    .address(request.getAddress())
+                    .address(address)
                     .nationality(request.getNationality())
                     .occupation(request.getOccupation())
                     .nationalId(request.getNationalId())
                     .build();
 
-//            kafkaTemplate.send("user-create", userCreatedEvent);
+            kafkaTemplate.send("user-created", userCreatedEvent);
             log.info("user: {}", userCreatedEvent.toString());
             log.info("User registered successfully and event sent to Kafka: {}", request.getEmail());
             return new GeneralResponse("User registered successfully");
@@ -109,7 +120,7 @@ public class AuthenticationService {
                 })
                 .orElseThrow(() -> {
                     log.warn("User not found: {}", request.getEmail());
-                    throw new UserNotFoundException("User not found with email: " + request.getEmail());
+                    return new UserNotFoundException("User not found with email: " + request.getEmail());
                 });
     }
 
@@ -129,7 +140,7 @@ public class AuthenticationService {
                 })
                 .orElseThrow(() -> {
                     log.warn("User not found for refresh token: {}", email);
-                    throw new UserNotFoundException("User not found with email: " + email);
+                    return new UserNotFoundException("User not found with email: " + email);
                 });
     }
 
@@ -148,7 +159,7 @@ public class AuthenticationService {
                 })
                 .orElseThrow(() -> {
                     log.warn("User not found for password reset: {}", request.getEmail());
-                    throw new UserNotFoundException("User not found with email: " + request.getEmail());
+                    return new UserNotFoundException("User not found with email: " + request.getEmail());
                 });
     }
 }

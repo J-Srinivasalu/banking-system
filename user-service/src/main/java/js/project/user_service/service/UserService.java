@@ -2,11 +2,11 @@ package js.project.user_service.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.criteria.Predicate;
+import js.project.model.UserCreatedEvent;
 import js.project.user_service.exception.UserNotFoundException;
 import js.project.user_service.model.Address;
 import js.project.user_service.model.User;
 import js.project.user_service.model.dto.AddressDto;
-import js.project.user_service.model.dto.UserCreatedEvent;
 import js.project.user_service.model.request.PatchUserRequest;
 import js.project.user_service.model.request.UpdateUserRequest;
 import js.project.user_service.model.response.GeneralResponse;
@@ -61,14 +61,15 @@ public class UserService {
                 return;
             }
 
-            AddressDto addressDto = event.getAddress();
+            js.project.model.Address eventAddress = event.getAddress();
+
             Address address = Address.builder()
-                    .street(addressDto.getStreet())
-                    .apartmentSuite(addressDto.getApartmentSuite())
-                    .city(addressDto.getCity())
-                    .state(addressDto.getState())
-                    .zipCode(addressDto.getZipCode())
-                    .country(addressDto.getCountry())
+                    .street(eventAddress.getStreet())
+                    .apartmentSuite(eventAddress.getApartmentSuite())
+                    .city(eventAddress.getCity())
+                    .state(eventAddress.getState())
+                    .zipCode(eventAddress.getZipCode())
+                    .country(eventAddress.getCountry())
                     .build();
 
 

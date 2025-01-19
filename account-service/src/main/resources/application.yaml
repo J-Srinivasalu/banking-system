@@ -2,10 +2,10 @@ spring:
   application:
     name: account-service
   datasource:
-    url: jdbc:h2:file:C:\Users\003SCK744\Downloads
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: password
+    url: jdbc:postgresql://localhost:5432/Bank_System
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: root
   #    hikari:
   #      maximum-pool-size: 10  # Development DB connection pool size
   jpa:

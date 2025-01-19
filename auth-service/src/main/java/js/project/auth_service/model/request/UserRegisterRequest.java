@@ -2,7 +2,7 @@ package js.project.auth_service.model.request;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
-import js.project.auth_service.model.Address;
+import js.project.auth_service.model.AddressDto;
 import js.project.auth_service.validation.ValidDateFormat;
 import js.project.auth_service.validation.ValidPassword;
 import lombok.Data;
@@ -32,7 +32,7 @@ public class UserRegisterRequest {
 
     @Valid // Important: Validate the nested Address object
     @NotNull(message = "Address cannot be null")
-    private Address address;
+    private AddressDto address;
 
     @NotEmpty(message = "Password cannot be empty")
     @ValidPassword(message = "Password must be 8-20 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character")

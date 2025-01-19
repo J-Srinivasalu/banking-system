@@ -29,7 +29,9 @@ public class SecurityConfig {
     private static final String[] WHITE_LIST_URLS = {
             "/api/v1/auth/register",
             "/api/v1/auth/login",
-            "/api/v1/auth/validate"
+            "/api/v1/auth/validate",
+            "/api/v1/auth/kafka-string-test",
+            "/api/v1/auth/kafka-object-test"
     };
     @Bean
     public PasswordEncoder passwordEncoder() {
