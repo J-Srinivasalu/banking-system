@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+// work in progress
 @Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 

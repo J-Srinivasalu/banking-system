@@ -71,8 +71,18 @@
                 [DIR] project
                     [DIR] auth_service
                         [FILE] AuthServiceApplicationTests.java
+                        [DIR] controller
+                            [FILE] AuthenticationControllerUnitTest.java
+                        [DIR] exception
+                            [FILE] GlobalExceptionHandlerTest.java
+                        [DIR] repository
+                            [FILE] UserRepositoryTest.java
+                        [DIR] security
+                            [FILE] JwtAuthenticationFilterTest.java
+                            [FILE] SecurityConfigTest.java
                         [DIR] service
-                            [FILE] AuthenticationService.java
+                            [FILE] AuthenticationServiceUnitTest.java
+                            [FILE] JwtServiceTest.java
 [DIR] target
     [DIR] classes
         [FILE] application-dev.yml
@@ -98,16 +108,19 @@
                         [FILE] UserNotFoundException.class
                         [FILE] UserRegistrationException.class
                     [DIR] model
+                        [FILE] AddressDto$AddressDtoBuilder.class
                         [FILE] AddressDto.class
                         [FILE] ObjectTest.class
                         [FILE] Role.class
                         [FILE] User$UserBuilder.class
                         [FILE] User.class
                         [DIR] request
+                            [FILE] AdminRegisterRequest$AdminRegisterRequestBuilder.class
                             [FILE] AdminRegisterRequest.class
                             [FILE] RefreshTokenRequest.class
                             [FILE] ResetPasswordRequest.class
                             [FILE] UserLoginRequest.class
+                            [FILE] UserRegisterRequest$UserRegisterRequestBuilder.class
                             [FILE] UserRegisterRequest.class
                         [DIR] response
                             [FILE] AuthenticationResponse.class
@@ -129,3 +142,24 @@
                         [FILE] ValidateDateFormatValidator.class
     [DIR] generated-sources
         [DIR] annotations
+    [DIR] generated-test-sources
+        [DIR] test-annotations
+    [DIR] test-classes
+        [DIR] js
+            [DIR] project
+                [DIR] auth_service
+                    [FILE] AuthServiceApplicationTests.class
+                    [DIR] controller
+                        [FILE] AuthenticationControllerUnitTest$TestConfig.class
+                        [FILE] AuthenticationControllerUnitTest.class
+                    [DIR] exception
+                        [FILE] GlobalExceptionHandlerTest.class
+                    [DIR] repository
+                        [FILE] UserRepositoryTest.class
+                    [DIR] security
+                        [FILE] JwtAuthenticationFilterTest.class
+                        [FILE] SecurityConfigTest.class
+                    [DIR] service
+                        [FILE] AuthenticationServiceUnitTest.class
+                        [FILE] JwtServiceTest.class
+[FILE] tree_structure.txt
